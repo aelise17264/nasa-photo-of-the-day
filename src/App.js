@@ -22,7 +22,7 @@ setPhotos(results.data.photos)
 
 const Images = ({address}) => (
   <div className="image-container">
-    <h2>{address.rover.name} utilizes {address.camera.full_name} (or {address.camera.name} for short) to capture never before seen images</h2>
+    <h2>{address.rover.name} utilizes {address.camera.full_name} (or {address.camera.name} for short) to stear clear of any obstacles while it works to capture never before seen images</h2>
 <h3>{address.rover.name} left Earth on {address.rover.launch_date} and reached its destination on {address.rover.landing_date}</h3>
     <h4>Picture taken on {address.earth_date}</h4>
      <img src={address.img_src}
@@ -35,7 +35,11 @@ const Images = ({address}) => (
 
   return (
     <div className="App">
-      
+      <div className='header'>
+        <header>
+      <h1>Have you been <span className='pun'>curious</span> about what our latest rover is up to on Mars?</h1>
+      </header>
+      </div>
       {/* <p>
         Read through the instructions in the README.md file to build your NASA
         app! Have fun <span role="img" aria-label='go!'>🚀</span>!
@@ -48,7 +52,7 @@ const Images = ({address}) => (
       })
 
 }
-
+  <footer>Check back with us weekley for new images and updates. Stay curious my friends</footer>
    </div>
   );
 }
