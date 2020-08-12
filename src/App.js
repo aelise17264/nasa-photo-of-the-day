@@ -5,7 +5,7 @@ import axios from 'axios'
 function App() {
 const [photo, setPhotos] = useState([])
  console.log(photo)
-let thisURL = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=DEMO_KEY'
+let thisURL = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=DEMO_KEY'
 console.log(thisURL)
 
 useEffect(() =>{
@@ -22,8 +22,9 @@ setPhotos(results.data.photos)
 
 const Images = ({address}) => (
   <div className="image-container">
-    <div className = "header">
-    <h2>Picture taken on {address.earth_date}</h2>
+    <h2>{address.rover.name} utilizes {address.camera.full_name} (or {address.camera.name} for short) to capture never before seen images</h2>
+<h3>{address.rover.name} left Earth on {address.rover.launch_date} and reached its destination on {address.rover.landing_date}</h3>
+    <h4>Picture taken on {address.earth_date}</h4>
      <img src={address.img_src}
      alt='mars at night'/>
    </div>
@@ -34,13 +35,14 @@ const Images = ({address}) => (
 
   return (
     <div className="App">
+      
       {/* <p>
         Read through the instructions in the README.md file to build your NASA
         app! Have fun <span role="img" aria-label='go!'>🚀</span>!
       </p> */}
       
       
-      </div>
+     
       {photo.map(pics => {
         return <Images key={pics.id} address={pics}/>
       })
