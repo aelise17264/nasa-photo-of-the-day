@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import "./App.css";
 import axios from 'axios'
+import styled, {keyframes} from 'styled-components'
+
 
 function App() {
 const [photo, setPhotos] = useState([])
@@ -20,14 +22,28 @@ setPhotos(results.data.photos)
 
 }, [])
 
+const StyleIndex = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img{
+    height: ${props => props.theme.height};
+    width: ${props => props.theme.width};
+    margin: ${props => props.theme.margins.small};
+    border-radius: 50%;
+  }
+`
+
 const Images = ({address}) => (
-  <div className="image-container">
-    <h2>{address.rover.name} utilizes {address.camera.full_name} (or {address.camera.name} for short) to stear clear of any obstacles while it works to capture never before seen images</h2>
-<h3>{address.rover.name} left Earth on {address.rover.launch_date} and reached its destination on {address.rover.landing_date}</h3>
-    <h4>Picture taken on {address.earth_date}</h4>
+  <StyleIndex className="image-container">
+    <h2>{address.rover.name} left Earth on {address.rover.launch_date} and reached its destination on {address.rover.landing_date}</h2>
+
+    <h3>{address.rover.name} utilizes {address.camera.full_name} (or {address.camera.name} for short) to stear clear of any obstacles while it works to capture never before seen images</h3>
+    
      <img src={address.img_src}
      alt='mars at night'/>
-   </div>
+     <h4>Picture taken on {address.earth_date}</h4>
+   </StyleIndex>
       
     
       )
@@ -45,8 +61,6 @@ const Images = ({address}) => (
         app! Have fun <span role="img" aria-label='go!'>🚀</span>!
       </p> */}
       
-      
-     
       {photo.map(pics => {
         return <Images key={pics.id} address={pics}/>
       })
