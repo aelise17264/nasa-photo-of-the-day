@@ -26,11 +26,19 @@ const StyleIndex = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: ${props => props.theme.primaryColor};
+  color: ${props => props.theme.secondaryColor};
+  padding: ${props => props.theme.containerMargin};
   img{
     height: ${props => props.theme.height};
     width: ${props => props.theme.width};
-    margin: ${props => props.theme.margins.small};
+    margin: ${props => props.theme.imageMargin};
     border-radius: 50%;
+  }
+  h3{
+    padding-right: 5rem;
+    padding-left: 5rem;
+
   }
 `
 
@@ -44,18 +52,49 @@ const Images = ({address}) => (
      alt='mars at night'/>
      <h4>Picture taken on {address.earth_date}</h4>
    </StyleIndex>
-      
+     
     
       )
 
+const kf = keyframes`
+blink{
+  0%{
+    opacity: 0;
+
+  }
+100%{
+   color: ${props => props.theme.spanColor};
+   opacity: 1;
+}
+}
+`
+
+const StyledHeader = styled.header`
+border: dotted 5px ${props => props.theme.white};
+ padding: 40px;
+ margin: 0;
+ background-color: ${props => props.theme.headingColor};
+   span{
+     font-style: italic;
+     font-weight: normal;
+     color: ${props => props.theme.spanColor};
+     animation: ${kf.blink} 1s alternate infinite;
+   }
+ 
+`
+
+const styledFooter = styled.footer`
+font-size: 2rem;
+
+`
 
   return (
     <div className="App">
-      <div className='header'>
-        <header>
+      <StyledHeader className='header'>
+       
       <h1>Have you been <span className='pun'>curious</span> about what our latest rover is up to on Mars?</h1>
-      </header>
-      </div>
+     
+      </StyledHeader>
       {/* <p>
         Read through the instructions in the README.md file to build your NASA
         app! Have fun <span role="img" aria-label='go!'>🚀</span>!
@@ -66,7 +105,7 @@ const Images = ({address}) => (
       })
 
 }
-  <footer>Check back with us weekley for new images and updates. Stay curious my friends</footer>
+  <styledFooter>Check back with us weekley for new images and updates. Stay curious my friends</styledFooter>
    </div>
   );
 }
